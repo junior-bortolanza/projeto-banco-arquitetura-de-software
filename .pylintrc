@@ -2,6 +2,10 @@
 disable=
       C0115, # missing-class-docstring
       E0015, # unrecognized-option
+      C0116, # missing-function-docstring
+      C0114, # missing-module-docstring
+      R0903, # too-few-public-methods
+      E1121, # too-many-function-args
 
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
