@@ -3,6 +3,7 @@ from src.models.sqlite.settings.base import Base
 
 class PessoaJuridicaTable(Base):
     __tablename__ = "pessoa_juridica"
+
     id = Column(BIGINT, primary_key=True)
     faturamento = Column(REAL, nullable=False)
     idade = Column(BIGINT, nullable=False)
