@@ -19,3 +19,17 @@ class PessoaFisicaRepository:
                 return pessoa_fisica
             except NoResultFound:
                 return []
+
+    def delete_pessoa_fisica(self, nome_completo: str) -> None:
+        with self.__db_connection as database:
+            try:
+                (
+                    database.session
+                    .query(PessoaFisicaTable)
+                    .filter(PessoaFisicaTable.nome_completo == nome_completo)
+                    .delete()
+                )
+                database.session.commit()
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
