@@ -18,7 +18,7 @@ class PessoaFisicaRepository:
             try:
                 dados_pessoa_fisica = PessoaFisicaTable(
                     nome_completo=nome_completo,
-                    idade=idade, 
+                    idade=idade,
                     saldo=saldo
                 )
                 database.session.add(dados_pessoa_fisica)
