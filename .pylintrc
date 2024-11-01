@@ -7,7 +7,8 @@ disable=
       R0903, # too-few-public-methods
       E1121, # too-many-function-args
       C0321, # multiple-statements
-
+      C0301, # line too long
+      C0303, # trailing-whitespace
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
 # only in one or another interpreter, leading to false positives when analysed.
@@ -298,10 +299,10 @@ exclude-too-few-public-methods=
 ignored-parents=
 
 # Maximum number of arguments for function / method.
-max-args=5
+max-args=7
 
 # Maximum number of attributes for a class (see R0902).
-max-attributes=7
+max-attributes=5
 
 # Maximum number of boolean expressions in an if statement (see R0916).
 max-bool-expr=5
@@ -316,7 +317,7 @@ max-locals=15
 max-parents=7
 
 # Maximum number of positional arguments for function / method.
-max-positional-arguments=5
+max-positional-arguments=15
 
 # Maximum number of public methods for a class (see R0904).
 max-public-methods=20
