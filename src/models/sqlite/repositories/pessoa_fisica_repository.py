@@ -12,7 +12,7 @@ class PessoaFisicaRepository:
     def __init__(self, db_connection) -> None:
         self.__db_connection = db_connection
 
-    def list_pessoa_fisica(self) -> list:
+    def list_pessoa_fisica(self) -> list[PessoaFisicaTable]:
         with self.__db_connection as database:
             try:
                 pessoa_fisica = database.session.query(PessoaFisicaTable).all()

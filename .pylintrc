@@ -6,6 +6,7 @@ disable=
       C0114, # missing-module-docstring
       R0903, # too-few-public-methods
       E1121, # too-many-function-args
+      C0321, # multiple-statements
 
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
