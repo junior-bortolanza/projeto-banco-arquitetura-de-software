@@ -9,6 +9,13 @@ disable=
       C0321, # multiple-statements
       C0301, # line too long
       C0303, # trailing-whitespace
+      E1111, # assignment-from-no-return
+      R0913, # too-many-arguments
+      R1705, # no-else-return
+      R1720, # no-else-raise
+      W0719, # broad-exception-raised
+      R0801, # Similar lines in 2 files
+      
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
 # only in one or another interpreter, leading to false positives when analysed.

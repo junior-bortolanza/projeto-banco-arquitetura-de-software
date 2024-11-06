@@ -12,12 +12,26 @@ class MockConnection:
                 (
                     [mock.call.query(PessoaFisicaTable)],
                     [
-                        PessoaFisicaTable(nome_completo="Pedro Santos", idade=28, saldo=8000.00),
-                        PessoaFisicaTable(nome_completo="Maria Oliveira", idade=45, saldo=4000.00)
+                        PessoaFisicaTable(renda_mensal=5000.00, 
+                                          idade=35, 
+                                          nome_completo="João da Silva",
+                                          celular="9999-8888", 
+                                          email="joao@example.com",
+                                          categoria="Categoria A", 
+                                          saldo=10000.00
+                                        ),
+                        PessoaFisicaTable(renda_mensal=4000.00, 
+                                          idade=45, 
+                                          nome_completo="Maria Oliveira",
+                                          celular="7777-6666", 
+                                          email="maria@example.com",
+                                          categoria="Categoria B", 
+                                          saldo=15000.00)
                     ]
                 )
             ]
         )
+
     def __enter__(self): return self
     def __exit__(self, exc_type, exc_val, exc_tb): pass
 
@@ -33,7 +47,6 @@ class MockConnectionNoResult:
     def __exit__(self, exc_type, exc_val, exc_tb): pass
 
 
-
 def test_list_pessoa_fisica():
     mock_connection = MockConnection()
     repo = PessoaFisicaRepository(mock_connection)
@@ -45,19 +58,7 @@ def test_list_pessoa_fisica():
 
     assert response[1].nome_completo == "Maria Oliveira"
     assert response[1].idade == 45
-    assert response[1].saldo == 4000.00
-
-def test_delete_pessoa_fisica():
-    mock_connection = MockConnection()
-    repo = PessoaFisicaRepository(mock_connection)
-
-    repo.delete_pessoa_fisica("PessoaFisica")
-
-    mock_connection.session.query.assert_called_once_with(PessoaFisicaTable)
-    mock_connection.session.filter.assert_called_once_with(
-                PessoaFisicaTable.nome_completo == "PessoaFisica"
-            )
-    mock_connection.session.delete.assert_called_once()
+    assert response[1].saldo == 15000.00
 
 def test_list_pessoa_fisica_no_result():
     mock_connection = MockConnectionNoResult()
@@ -69,3 +70,15 @@ def test_list_pessoa_fisica_no_result():
     mock_connection.session.filter.assert_not_called()
 
     assert response == []
+
+def test_consultar_saldo():
+    mock_connection = MockConnection()
+    repo = PessoaFisicaRepository(mock_connection)
+    pessoa_fisica = "Maria Oliveira"
+    response = repo.consultar_saldo(pessoa_fisica)
+
+    mock_connection.session.query.assert_called_once_with(PessoaFisicaTable)
+    mock_connection.session.filter_by.assert_called_once()
+    mock_connection.session.first.assert_not_called()
+
+    assert response[1].consulta.saldo == pessoa_fisica

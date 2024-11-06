@@ -7,10 +7,10 @@ class PessoaFisicaTable(Base):
     id = Column(BIGINT, primary_key=True)
     renda_mensal = Column(REAL, nullable=True)
     idade = Column(BIGINT, nullable=True)
-    nome_completo = Column(String, nullable=False)
+    nome_completo = Column(String, nullable=True)
     celular = Column(String, nullable=True)
     email = Column(String, nullable=True)
-    categoria = Column(String)
+    categoria = Column(String, nullable=True)
     saldo = Column(REAL, nullable=True)
 
     def __repr__(self):
