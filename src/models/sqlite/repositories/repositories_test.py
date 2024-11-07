@@ -69,7 +69,7 @@ def test_create_pessoa_juridica():
     email_corporativo = "junior@juniorservice.com"
     categoria =  "Categoria C"
     saldo = 30000.00
-
+    
     repo = PessoaJuridicaRepository(db_connection_handler)
     response = repo.create_pessoa_juridica(faturamento, idade, nome_fantasia, celular, email_corporativo, categoria, saldo)
     print()
