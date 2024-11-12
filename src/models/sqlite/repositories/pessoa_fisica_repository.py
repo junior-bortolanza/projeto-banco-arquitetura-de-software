@@ -46,7 +46,7 @@ class PessoaFisicaRepository(ClienteInterface):
             try:
                 consultar = (database.session
                 .query(PessoaFisicaTable)
-                .filter_by(nome_completo=pessoa_fisica.nome_completo)
+                .filter_by(nome_completo=pessoa_fisica)
                 .first()
             )
                 return consultar.saldo

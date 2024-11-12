@@ -74,11 +74,11 @@ def test_list_pessoa_fisica_no_result():
 def test_consultar_saldo():
     mock_connection = MockConnection()
     repo = PessoaFisicaRepository(mock_connection)
-    pessoa_fisica = "Maria Oliveira"
+    pessoa_fisica = 'João da Silvaa'
     response = repo.consultar_saldo(pessoa_fisica)
 
     mock_connection.session.query.assert_called_once_with(PessoaFisicaTable)
     mock_connection.session.filter_by.assert_called_once()
-    mock_connection.session.first.assert_not_called()
+    mock_connection.session.first.assert_called_once()
 
-    assert response[1].consulta.saldo == pessoa_fisica
+    assert response == 10000.00
