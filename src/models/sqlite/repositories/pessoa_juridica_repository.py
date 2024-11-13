@@ -44,7 +44,7 @@ class PessoaJuridicaRepository:
             try:
                 consultar = (database.session
                 .query(PessoaJuridicaTable)
-                .filter_by(pessoa_juridica.nome)
+                .filter_by(nome_fantasia=pessoa_juridica)
                 .first()
             )
                 return consultar.saldo
@@ -57,12 +57,14 @@ class PessoaJuridicaRepository:
         limite_saque = 20000.00
 
         saldo = self.consultar_saldo(pessoa_juridica)
-        if quantia <= limite_saque and quantia <= saldo:
-
+        if quantia > limite_saque:
+            raise Exception("Error: Valor excede o limite para saque! :(")
+        
+        elif quantia > saldo:
+            raise Exception("Error: Saldo Insuficiente!")       
+        else:
             saldo -= quantia
             return f"Saque de R${quantia}, realizado com sucesso. Saldo atual: R${saldo}"
-        else:   
-            return "Error: Valor de saque excede o limite ou saldo insuficiente!"
         
     def extrato_bancario(self, pessoa_juridica: str) -> dict:
         with self.__db_connection as database:
