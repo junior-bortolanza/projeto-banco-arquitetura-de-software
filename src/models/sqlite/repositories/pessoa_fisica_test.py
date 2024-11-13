@@ -74,7 +74,7 @@ def test_list_pessoa_fisica_no_result():
 def test_consultar_saldo():
     mock_connection = MockConnection()
     repo = PessoaFisicaRepository(mock_connection)
-    pessoa_fisica = 'João da Silvaa'
+    pessoa_fisica = 'João da Silva'
     response = repo.consultar_saldo(pessoa_fisica)
 
     mock_connection.session.query.assert_called_once_with(PessoaFisicaTable)
@@ -82,3 +82,13 @@ def test_consultar_saldo():
     mock_connection.session.first.assert_called_once()
 
     assert response == 10000.00
+
+def test_sacar_dinheiro():
+    mock_connection = MockConnection()
+    repo = PessoaFisicaRepository(mock_connection)
+    quantia = 5000
+    pessoa_fisica = "Maria Oliveira"
+    repo.consultar_saldo(pessoa_fisica)
+    response = repo.sacar_dinheiro(quantia, pessoa_fisica)
+
+    assert response == "Saque de R$5000, realizado com sucesso. Saldo atual: R$5000.0"
