@@ -60,10 +60,10 @@ class PessoaFisicaRepository(ClienteInterface):
 
         saldo = self.consultar_saldo(pessoa_fisica)
 
-        if quantia >= limite_saque:
+        if quantia > limite_saque:
             raise Exception("Error :(: Valor excede o limite para saque!")
         
-        elif quantia >= saldo:
+        elif quantia > saldo:
             raise Exception("Error: Saldo Insuficiente!")       
         else:
             saldo -= quantia
@@ -76,7 +76,7 @@ class PessoaFisicaRepository(ClienteInterface):
 
                 extrato_pessoa_fisica = (database.session
                 .query(PessoaFisicaTable)
-                .filter_by(nome_completo=pessoa_fisica.nome_completo)
+                .filter_by(nome_completo=pessoa_fisica)
                 .first()
             )
                 return {
@@ -86,7 +86,7 @@ class PessoaFisicaRepository(ClienteInterface):
                 }
             
             except Exception as exception:
-                database.ssesion.rollback()
+                database.session.rollback()
                 raise exception    
 
     def list_pessoa_fisica(self) -> list[PessoaFisicaTable]:
