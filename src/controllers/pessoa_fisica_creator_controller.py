@@ -4,10 +4,11 @@ class PessoaFisicaController:
     def __init__(self, pessoa_fisica_repository: ClienteInterface) -> None:
         self.__pessoa_fisica_repository = pessoa_fisica_repository
 
-    def create(self, renda_mensal: float, idade: int, celular: str, email: str, categoria: str, saldo: float  )-> dict:
+    def create(self, renda_mensal: float, idade: int, nome_completo: str, celular: str, email: str, categoria: str, saldo: float  )-> dict:
         self.__pessoa_fisica_repository.create(
             renda_mensal=renda_mensal,
             idade=idade,
+            nome_completo=nome_completo,
             celular=celular,
             email=email,
             categoria=categoria,
