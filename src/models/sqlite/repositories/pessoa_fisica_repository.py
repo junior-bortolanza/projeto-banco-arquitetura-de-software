@@ -6,9 +6,9 @@ EX: INSERIR NO DB, SELEÇÃO
 '''
 from sqlalchemy.orm.exc import NoResultFound
 from src.models.sqlite.entities.pessoa_fisica import PessoaFisicaTable
-from src.models.sqlite.interfaces.cliente_repository import ClienteInterface
+from src.models.sqlite.interfaces.cliente_pessoa_fisica_repository import ClientePessoaFisicaInterface
 
-class PessoaFisicaRepository(ClienteInterface):
+class PessoaFisicaRepository(ClientePessoaFisicaInterface):
     def __init__(self, db_connection) -> None:
         self.__db_connection = db_connection
 

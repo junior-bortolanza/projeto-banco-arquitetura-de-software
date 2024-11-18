@@ -1,7 +1,7 @@
-from src.models.sqlite.interfaces.cliente_repository import ClienteInterface
+from src.models.sqlite.interfaces.cliente_pessoa_fisica_repository import ClientePessoaFisicaInterface
 
 class PessoaFisicaController:
-    def __init__(self, pessoa_fisica_repository: ClienteInterface) -> None:
+    def __init__(self, pessoa_fisica_repository: ClientePessoaFisicaInterface) -> None:
         self.__pessoa_fisica_repository = pessoa_fisica_repository
 
     def create(self, renda_mensal: float, idade: int, nome_completo: str, celular: str, email: str, categoria: str, saldo: float  )-> dict:
@@ -24,7 +24,7 @@ class PessoaFisicaController:
     
     def realizar_saque(self, quantia: float, nome_pessoa_fisica: str) -> None:
         try:
-            mensagem_saque = self.__pessoa_fisica_repository.realizar_saque(quantia, nome_pessoa_fisica)
+            mensagem_saque = self.__pessoa_fisica_repository.sacar_dinheiro(quantia, nome_pessoa_fisica)
             return mensagem_saque
         except Exception as exception:
             raise exception
