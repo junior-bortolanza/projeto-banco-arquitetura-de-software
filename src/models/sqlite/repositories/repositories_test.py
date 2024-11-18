@@ -74,7 +74,3 @@ def test_create_pessoa_juridica():
     response = repo.create_pessoa_juridica(faturamento, idade, nome_fantasia, celular, email_corporativo, categoria, saldo)
     print()
     print(response)
-
-
-
-  

@@ -44,7 +44,7 @@ class PessoaJuridicaRepository:
             try:
                 consultar = (database.session
                 .query(PessoaJuridicaTable)
-                .filter_by(nome_fantasia=pessoa_juridica)
+                .filter_by(PessoaJuridicaTable.nome_fantasia == pessoa_juridica)
                 .first()
             )
                 return consultar.saldo
@@ -72,13 +72,13 @@ class PessoaJuridicaRepository:
 
                 extrato_pessoa_fisica = (database.session
                 .query(PessoaJuridicaTable)
-                .filter_by(PessoaJuridicaTable.nome_fantasia == pessoa_juridica)
+                .filter_by(nome_fantasia=pessoa_juridica)
                 .first()
             )
                 return {
                     "Nome": extrato_pessoa_fisica.nome_fantasia,
-                    "Saldo": extrato_pessoa_fisica.saldo,
-                    "Categoria": extrato_pessoa_fisica.categoria
+                    "Faturamento": extrato_pessoa_fisica.faturamento,
+                    "Saldo": extrato_pessoa_fisica.saldo
                 }
             
             except Exception as exception:
@@ -90,7 +90,7 @@ class PessoaJuridicaRepository:
             try:
                 nome_pessoa_juridica = (database.session
                 .query(PessoaJuridicaTable)
-                .filter(PessoaJuridicaTable.id== pessoa_juridica_id)
+                .filter(PessoaJuridicaTable.id == pessoa_juridica_id)
                 .one()
             )
                 return nome_pessoa_juridica

@@ -4,7 +4,6 @@ REPOSITORIE RESPONSAVEL DAS AÇÕES COM O BANCO DE DADOS
 EX: INSERIR NO DB, SELEÇÃO
 
 '''
-
 from sqlalchemy.orm.exc import NoResultFound
 from src.models.sqlite.entities.pessoa_fisica import PessoaFisicaTable
 from src.models.sqlite.interfaces.cliente_repository import ClienteInterface
@@ -46,7 +45,7 @@ class PessoaFisicaRepository(ClienteInterface):
             try:
                 consultar = (database.session
                 .query(PessoaFisicaTable)
-                .filter_by(nome_completo=pessoa_fisica)
+                .filter_by(PessoaFisicaTable.nome_completo == pessoa_fisica)
                 .first()
             )
                 return consultar.saldo
@@ -61,10 +60,10 @@ class PessoaFisicaRepository(ClienteInterface):
         saldo = self.consultar_saldo(pessoa_fisica)
 
         if quantia > limite_saque:
-            raise Exception("Error :(: Valor excede o limite para saque!")
+            raise NoResultFound("Error :(: Valor excede o limite para saque!")
         
         elif quantia > saldo:
-            raise Exception("Error: Saldo Insuficiente!")       
+            raise NoResultFound("Error: Saldo Insuficiente!")       
         else:
             saldo -= quantia
             return f"Saque de R${quantia}, realizado com sucesso. Saldo atual: R${saldo}"
