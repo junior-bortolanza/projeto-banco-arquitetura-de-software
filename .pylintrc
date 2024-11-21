@@ -15,6 +15,7 @@ disable=
       R1720, # no-else-raise
       W0719, # broad-exception-raised
       R0801, # Similar lines in 2 files
+      E0401, # import-error
       
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
