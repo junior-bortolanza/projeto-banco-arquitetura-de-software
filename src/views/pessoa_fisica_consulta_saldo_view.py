@@ -1,0 +1,14 @@
+from src.controllers.interfaces.pessoa_fisica_consulta_saldo_controller import PessoaFisicaConsultarSaldoControllerInterface
+from .interfaces.view_interface import ViewInterface
+from .http_types.http_request import HttpRequest
+from .http_types.http_response import HttpResponse
+
+class PessoaFisicaCreateView(ViewInterface):
+    def __init__(self, controller: PessoaFisicaConsultarSaldoControllerInterface):
+        self.__controller = controller
+        
+    def handle(self, http_request: HttpRequest) -> HttpResponse:
+        nome_pessoa_fisica = http_request.param['nome_pessoa_fisica']
+        body_response = self.__controller.consultar_saldo(nome_pessoa_fisica)
+
+        return HttpResponse(status_code=201, body=body_response)
