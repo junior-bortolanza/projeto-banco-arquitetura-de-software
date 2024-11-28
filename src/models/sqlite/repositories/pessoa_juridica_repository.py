@@ -65,26 +65,7 @@ class PessoaJuridicaRepository(ClientePessoaJuridicaInteface):
         else:
             saldo -= quantia
             return f"Saque de R${quantia}, realizado com sucesso. Saldo atual: R${saldo}"
-        
-    def extrato_bancario(self, pessoa_juridica: str) -> dict:
-        with self.__db_connection as database:
-            try:
 
-                extrato_pessoa_fisica = (database.session
-                .query(PessoaJuridicaTable)
-                .filter_by(nome_fantasia=pessoa_juridica)
-                .first()
-            )
-                return {
-                    "Nome": extrato_pessoa_fisica.nome_fantasia,
-                    "Faturamento": extrato_pessoa_fisica.faturamento,
-                    "Saldo": extrato_pessoa_fisica.saldo
-                }
-            
-            except Exception as exception:
-                database.ssesion.rollback()
-                raise exception    
-    
     def get_pessoa_juridica(self, pessoa_juridica_id: str) -> None:
         with self.__db_connection as database:
             try:
