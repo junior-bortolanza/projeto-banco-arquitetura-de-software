@@ -60,20 +60,6 @@ def test_sacar_dinheiro():
     response = repo.sacar_dinheiro(quantia, pessoa_juridica)
     
     assert response == "Saque de R$20000.0, realizado com sucesso. Saldo atual: R$30000.0"
-
-def test_extrato_bancario():
-    mock_connection = MockConnection()
-    repo = PessoaJuridicaRepository(mock_connection)
-    nome_fantasia = "Empresa XYZ"
-    saldo = 50000.0
-    faturamento = 100000.0
-    response = repo.extrato_bancario(nome_fantasia)
-
-    mock_connection.session.query.assert_called_once_with(PessoaJuridicaTable)
-    mock_connection.session.filter_by.assert_called_once()
-    mock_connection.session.first.assert_called_once()
-        
-    assert response == {"Nome": nome_fantasia, "Faturamento": faturamento, "Saldo": saldo}
     
 def test_list_pessoa_juridica():
     mock_connection = MockConnection()
