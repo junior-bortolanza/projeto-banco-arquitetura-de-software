@@ -67,26 +67,6 @@ class PessoaFisicaRepository(ClientePessoaFisicaInterface):
         else:
             saldo -= quantia
             return f"Saque de R${quantia}, realizado com sucesso. Saldo atual: R${saldo}"
-    
-        
-    def extrato_bancario(self, pessoa_fisica: str) -> dict:
-        with self.__db_connection as database:
-            try:
-
-                extrato_pessoa_fisica = (database.session
-                .query(PessoaFisicaTable)
-                .filter_by(nome_completo=pessoa_fisica)
-                .first()
-            )
-                return {
-                    "Nome": extrato_pessoa_fisica.nome_completo,
-                    "Saldo": extrato_pessoa_fisica.saldo,
-                    "Categoria": extrato_pessoa_fisica.categoria
-                }
-            
-            except Exception as exception:
-                database.session.rollback()
-                raise exception    
 
     def list_pessoa_fisica(self) -> list[PessoaFisicaTable]:
         with self.__db_connection as database:
