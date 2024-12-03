@@ -2,16 +2,19 @@
 from .pessoa_fisica_consulta_saldo_controller import PessoaFisicaConsultarSaldoController
 
 class MockPessoaFisica:
-    def __init__(self, nome_completo,saldo):
+    def __init__(self, nome_completo, saldo):
         self.nome_completo = nome_completo
         self.saldo = saldo
 
 class MockPessoaFisicaRepository:
     def consultar_saldo(self, nome_pessoa_fisica: str):
-        return MockPessoaFisica(nome_completo="Junior Bortolanza", saldo=50000.0)
+        pass
 
 def test_consultar_saldo():
-    nome_pessoa_fisica = " "
+    nome_pessoa_fisica = {
+        "nome_completo": "Junior Bortolanza",
+        "saldo": 50000.0
+    }
     controller = PessoaFisicaConsultarSaldoController(MockPessoaFisicaRepository())
     response = controller.consultar_saldo(nome_pessoa_fisica)
 
@@ -22,6 +25,7 @@ def test_consultar_saldo():
                 "attributes": {
                     "nome_completo": "Junior Bortolanza",
                     "saldo": 50000.0
+                    
                 }
             }
         }
