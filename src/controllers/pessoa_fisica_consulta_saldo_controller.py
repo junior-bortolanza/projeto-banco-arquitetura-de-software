@@ -11,9 +11,9 @@ class PessoaFisicaConsultarSaldoController(PessoaFisicaConsultarSaldoControllerI
         response = self.__format_response(consulta_saldo)
         return response
 
-    def __consultar_saldo_in_db(self, nome_pessoa_fisica: str) -> PessoaFisicaTable:
+    def __consultar_saldo_in_db(self, pessoa_fisica: str) -> PessoaFisicaTable:
         try:
-            saldo = self.__pessoa_fisica_repository.consultar_saldo(nome_pessoa_fisica)
+            saldo = self.__pessoa_fisica_repository.consultar_saldo(pessoa_fisica)
             return saldo
         except Exception as exception:
             raise exception
