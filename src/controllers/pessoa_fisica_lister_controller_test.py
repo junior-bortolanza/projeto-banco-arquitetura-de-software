@@ -4,7 +4,7 @@ from src.controllers.pessoa_fisica_lister_controller import PessoaFisicaListerCo
 class MockPessoaFisicaRepository:
     def list_pessoa_fisica(self):
         return [
-            PessoaFisicaTable(nome_completo="Junior Bortolanza", id=1),
+            PessoaFisicaTable(id=32, nome_completo="Gelson Bortolanza Junior", saldo=50000.0),
         ]
 
 def test_list_pessoa_fisica():
@@ -13,10 +13,10 @@ def test_list_pessoa_fisica():
 
     expected_response =  {
         "data": {
-            "type": "PessoaFisica",
+            "type": "Pessoa Fisica",
             "count": 1,
             "attributes": [
-                { "nome_completo": "Junior Bortolanza", "id": 1}
+                { "id": 32, "nome_completo": "Gelson Bortolanza Junior", "saldo": 50000.0}
             ]
         }
     }

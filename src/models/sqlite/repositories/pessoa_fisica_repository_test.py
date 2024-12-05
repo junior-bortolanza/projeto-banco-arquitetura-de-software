@@ -43,12 +43,13 @@ class MockConnectionNoResult:
 def test_sacar_dinheiro():
     mock_connection = MockConnection()
     repo = PessoaFisicaRepository(mock_connection)
-    quantia = 5000
+    quantia = 5000.0
     pessoa_fisica = "João da Silva"
     repo.consultar_saldo(pessoa_fisica)
     response = repo.sacar_dinheiro(quantia, pessoa_fisica)
 
-    assert response == "Saque de R$5000, realizado com sucesso. Saldo atual: R$5000.0"   
+    assert response == "Saque de R$5000.0, realizado com sucesso. Saldo atual: R$5000.0"   
+
 
 def test_list_pessoa_fisica():
     mock_connection = MockConnection()

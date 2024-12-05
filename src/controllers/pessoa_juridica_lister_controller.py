@@ -1,7 +1,7 @@
 from src.models.sqlite.interfaces.cliente_pessoa_juridica_repository import ClientePessoaJuridicaInteface
 from src.controllers.interfaces.pessoa_juridica_lister_controller import PessoaJuridicaListerControllerInterface
 
-class PessoaJuridicaListerControlle(PessoaJuridicaListerControllerInterface):
+class PessoaJuridicaListerController(PessoaJuridicaListerControllerInterface):
     def __init__(self, pessoa_juridica_repository: ClientePessoaJuridicaInteface) -> None:
         self.__pessoa_juridica_repository = pessoa_juridica_repository
 
@@ -18,9 +18,11 @@ class PessoaJuridicaListerControlle(PessoaJuridicaListerControllerInterface):
         formated_pessoa_juridica = []
         
         for pj in pessoa_juridica:
-            formated_pessoa_juridica.append({ 
-                "nome_fantasia": pj.nome_fantasia, 
-                "id": pj.id 
+            formated_pessoa_juridica.append({
+                "id": pj.id, 
+                "nome_fantasia": pj.nome_fantasia,
+                "saldo": pj.saldo 
+                
             })
 
         return {

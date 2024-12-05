@@ -17,10 +17,6 @@ class ClientePessoaJuridicaInteface(ABC):
     @abstractmethod
     def sacar_dinheiro(self, quantia: float, pessoa_juridica: str) -> None:
         pass
-
-    @abstractmethod
-    def consultar_saldo(self, pessoa_juridica: str) -> dict: 
-        pass
     
     def list_pessoa_juridica(self) -> list:
         pass

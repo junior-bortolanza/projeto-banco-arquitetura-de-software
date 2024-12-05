@@ -19,9 +19,5 @@ class ClientePessoaFisicaInterface(ABC):
     def sacar_dinheiro(self, quantia: float, pessoa_fisica: str) -> None:
         pass
 
-    @abstractmethod    
-    def consultar_saldo(self, pessoa_fisica: str) -> dict: 
-        pass
-
     def list_pessoa_fisica(self) -> list:
         pass

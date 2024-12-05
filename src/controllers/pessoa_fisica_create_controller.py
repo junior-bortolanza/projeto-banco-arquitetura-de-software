@@ -1,7 +1,8 @@
+from src.errors.error_types.http_bad_request import HttpBadRequestError
 from src.models.sqlite.interfaces.cliente_pessoa_fisica_repository import ClientePessoaFisicaInterface
 from src.controllers.interfaces.pessoa_fisica_create_controller import PessoaFisicaControllerInterface
 
-class PessoaFisicaController(PessoaFisicaControllerInterface):
+class PessoaFisicaCreateController(PessoaFisicaControllerInterface):
     def __init__(self, pessoa_fisica_repository: ClientePessoaFisicaInterface) -> None:
         self.__pessoa_fisica_repository = pessoa_fisica_repository
 
@@ -22,7 +23,7 @@ class PessoaFisicaController(PessoaFisicaControllerInterface):
     def __validate_nome_pessoa_fisica(self, idade: int, nome_completo: str, saldo: float ) -> None:
         
         if not nome_completo and idade and saldo:
-            raise Exception("Nome da pessoa fisica inválida!")
+            raise HttpBadRequestError("Nome da pessoa fisica inválida!")
     
     def __create_pessoa_fisica_in_db(self, renda_mensal, idade, nome_completo, celular, email, categoria, saldo) -> None:
         self.__pessoa_fisica_repository.create_pessoa_fisica(renda_mensal, idade, nome_completo, celular, email, categoria, saldo)
@@ -30,7 +31,7 @@ class PessoaFisicaController(PessoaFisicaControllerInterface):
     def __format_response(self, pessoa_fisica_info: dict ) -> dict:
         return {
             "data": {
-                "type": "PessoaFisica",
+                "type": "Pessoa Fisica",
                 "count": 1,
                 "attributes": pessoa_fisica_info
               }
